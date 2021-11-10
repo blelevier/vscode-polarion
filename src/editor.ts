@@ -155,30 +155,27 @@ export async function insertWorkItem() {
   if (editor !== undefined) {
 
     // Ask for a title in a textbox
-    const title = await.vscode.window.showInputBox()
+    const title = await vscode.window.showInputBox()
     if (title !== undefined){
-      editor.edit(editBuilder => {
-        editBuilder.insert(position, title)
-      })
-    }
+    
+      // TODO: Ask the work item type?
 
-    // TODO: Ask the work item type?
-
-    // Insert ID in a specific position or replace a selected word
-    if (editor.selection.isEmpty) {
-      // the Position object gives you the line and character where the cursor is
-      const position = editor.selection.active;
-      editor.edit(editBuilder => {
-        editBuilder.insert(position, "CAR-12345") //TODO: replace by new ID
-      })
+      // Insert ID in a specific position or replace a selected word
+      if (editor.selection.isEmpty) {
+        // the Position object gives you the line and character where the cursor is
+        const position = editor.selection.active;
+        editor.edit(editBuilder => {
+          editBuilder.insert(position, "CAR-12345") //TODO: replace by new ID
+        })
+      }
+      else{
+        const document = editor.document
+        const selection = editor.selection;
+        const word = document.getText(selection) // Get the string that was selected
+        editor.edit(editBuilder => {
+          editBuilder.replace(selection, "CAR-12345") //TODO: replace by new ID
+        })
+      }
     }
-  }
-  else{
-    const document = editor.document
-    const selection = editor.selection;
-    const word = document.getText(selection) // Get the string that was selected
-    editor.edit(editBuilder => {
-      editBuilder.replace(selection, "CAR-12345") //TODO: replace by new ID
-    })
   }
 }
