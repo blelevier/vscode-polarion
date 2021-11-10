@@ -26,6 +26,7 @@ export async function activate(context: vscode.ExtensionContext) {
   // commands
   vscode.commands.registerCommand('vscode-polarion.clearCache', () => pol?.polarion.clearCache());
   vscode.commands.registerCommand('vscode-polarion.openPolarion', () => editor.handleOpenPolarion());
+  vscode.commands.registerCommand('vscode-polarion.insertWorkItem', () => editor.insertWorkItem());
   vscode.commands.registerCommand('vscode-polarion.restart', () => { pol.createPolarion(outputChannel).finally(() => { polarionStatus.update(pol.polarion); }); });
   vscode.commands.registerCommand('vscode-polarion.getWorkItemTitle', (workItem: string) => {
     if (pol?.polarion.initialized === true) {

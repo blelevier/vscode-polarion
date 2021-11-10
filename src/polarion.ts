@@ -155,7 +155,7 @@ export class Polarion {
     }
 
 
-    //lookup in dictrionairy
+    //lookup in dictionary
     var item = undefined;
     if (this.itemCache.has(workItem)) {
       item = this.itemCache.get(workItem);
